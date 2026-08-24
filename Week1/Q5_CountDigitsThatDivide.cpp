@@ -1,24 +1,52 @@
-// Given a positive integer n, count the number of digits in n that divide n evenly (i.e., without leaving a
-// remainder). Return the total number of such digits.
+// Digits in N that Divide it
+// Given a non-negative integer s represented as a string, count the number of digits in s that divide the number 
+// represented by s.
 
-// A digit d of n divides n evenly if the remainder when n is divided by d is 0 (n % d == 0).
-// Digits of n should be checked individually. If a digit is 0, it should be ignored because division by 0 is
-// undefined.
+// A digit is considered valid only if it is non-zero and the number represented by s is divisible by that digit.
 
+// If a digit appears multiple times in s, each occurrence should be counted separately.
+
+// pura khud se nahi hua 
 class Solution {
   public:
-    // Function to count the number of digits in n that evenly divide n
-    int evenlyDivides(int n) {
+    int divisibleByDigits(string& s) {
         // code here
-        int count =0;
-        int a =n;
-        while(n>0){
-            int r = n %10;
-            n=n/10;
-            if(r!=0 && a%r==0){
-                count++;
+        int count=0;
+        vector<int>ans(10,0);
+        for(int i=0;i<s.size();i++){
+            int a = s[i]-'0';
+            int r=0;
+            if(a==0){
+                continue;
+            }
+            else if(ans[a]==1){
+                count++;continue;
+            }
+            else if(ans[a]==-1){
+                continue;
+            }
+            else{
+                for(int j=0; j<s.size();j++){
+                    int b = s[j]-'0';
+                    r= r*10+b;
+                    r=r%a;
+                }
+                if(r==0){
+                    count++;
+                    ans[a]=1;
+                }
+                else{
+                    ans[a]=-1;
+                }
             }
         }
         return count ;
     }
 };
+// clever approach . tc O(n) sc O(1). But still these type of approach in large project will still cost few crores
+// more we dont want that .
+
+
+// better approach
+// next revision try it 
+// divide in similar fashion for 1-9 as it is the optimal approach , less query more savings 

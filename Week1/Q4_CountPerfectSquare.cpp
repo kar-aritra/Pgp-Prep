@@ -6,12 +6,10 @@ class Solution {
   public:
     int countSquares(int n) {
         // code here
-        int count =0;
-        for(int i=1;i<=sqrt(n);i++){
-            if(i*i<n){
-                count++;
-            }
+        int count1 = sqrt(n);
+        if(count1*count1 == n ){
+            return count1 -1 ;
         }
-        return count ;
+        return count1 ;
     }
 };
