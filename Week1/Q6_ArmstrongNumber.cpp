@@ -6,18 +6,19 @@ class Solution {
   public:
     bool armstrongNumber(int n) {
         // code here
-        int a =n;
-        int com=0;
-        while(a>0){
-            int r = a%10;
-            com=com+r*r*r;
-            a=a/10;
+        int temp=n;
+        int sum=0;
+        while(temp>0){
+            int a = temp%10;
+            sum =sum+ pow(a,3);
+            temp=temp/10;
         }
-        if(com==n){
+        if(n==sum){
             return true ;
         }
         else{
             return false;
         }
+        return false;
     }
 };

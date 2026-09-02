@@ -1,26 +1,48 @@
+// All Divisors of a Number
+// Given an integer n, return all the divisors of n in the ascending order.
+
 
 
 class Solution {
   public:
-    vector<int> getDivisors(int n) {
+    vector<int> getDivisors(int n)
+    {
         // code here
+        bool a = true;
         vector<int>ans;
-        vector<int>ans1(n+1,0);
         if(n==1){
             ans.push_back(1);
             return ans ;
         }
-        for(int i=1;i<=n/2;i++){
-            if(ans1[i]!=-1 && n%i==0){
-                ans.push_back(i);
-                ans1[i]=-1;
-                int a =n/i;
-                if(ans1[a]==0){
-                    ans.push_back(a);
-                    ans1[a]=-1;
+        if(n<=3){
+            ans.push_back(1);
+            ans.push_back(n);
+            return ans ;
+        }
+        for(int i=2; i*i<=n;i++)
+        {
+            if(n%i==0){
+                a=true;
+                break;
+            }
+            else{
+                a=false;
+            }
+        }
+        if(a==false)
+        {
+            ans.push_back(1);
+            ans.push_back(n);
+        }
+        else
+        {
+            for(int i=1;i*i<=n;i++){
+                if(i*i==n){
+                    ans.push_back(i);
                 }
-                else{
-                    exit;
+                else if(n%i==0){
+                    ans.push_back(i);
+                    ans.push_back(n/i);
                 }
             }
         }
